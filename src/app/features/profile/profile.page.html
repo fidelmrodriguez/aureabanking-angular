@@ -1,0 +1,38 @@
+<section class="page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Perfil</p>
+      <h1>Preferências e segurança</h1>
+      <p class="muted">Configurações de sessão, tema e segurança da conta.</p>
+    </div>
+    <button class="btn btn-danger" type="button" (click)="authStore.logout()">Sair da conta</button>
+  </header>
+
+  <div class="grid grid-2">
+    <article class="card profile-card">
+      <div class="avatar">U</div>
+      <div>
+        <p class="eyebrow">Usuário autenticado</p>
+        <h2>{{ authStore.displayName() }}</h2>
+        <p class="muted">Identificação padronizada para atendimento e proteção da sessão.</p>
+      </div>
+    </article>
+
+    <article class="card settings-card">
+      <h2>Configurações</h2>
+      <div class="field">
+        <label for="theme">Tema</label>
+        <select id="theme" class="select" [ngModel]="themeStore.mode()" (ngModelChange)="changeTheme($event)">
+          <option value="light">Claro</option>
+          <option value="dark">Escuro</option>
+        </select>
+      </div>
+
+      <div class="security-list">
+        <span class="badge">Sessão protegida</span>
+        <span class="badge">Auditoria ativa</span>
+        <span class="badge">Permissões por rota</span>
+      </div>
+    </article>
+  </div>
+</section>

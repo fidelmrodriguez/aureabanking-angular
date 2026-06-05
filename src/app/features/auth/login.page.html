@@ -1,0 +1,71 @@
+<main class="login-page">
+  <section class="login-hero">
+    <div class="brand"><span>A</span><strong>Aurea Banking</strong></div>
+    <div>
+      <p class="eyebrow">Internet Banking</p>
+      <h1>Controle financeiro com segurança de banco digital.</h1>
+      <p>Centralize saldo, cartões, investimentos, pagamentos e auditoria em uma experiência criada para decisões rápidas e operações protegidas.</p>
+    </div>
+    <div class="hero-grid">
+      <article>
+        <strong>Conta digital</strong>
+        <span>Saldo, cartões, limites e investimentos sempre à vista.</span>
+      </article>
+      <article>
+        <strong>Operação protegida</strong>
+        <span>Validações, trilha de auditoria e permissões por perfil.</span>
+      </article>
+      <article>
+        <strong>Agenda inteligente</strong>
+        <span>Pagamentos, Pix e alertas financeiros sob controle.</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="login-card card">
+    <button class="theme-button" type="button" (click)="themeStore.toggle()">
+      {{ themeStore.mode() === 'dark' ? 'Tema claro' : 'Tema escuro' }}
+    </button>
+
+    <p class="eyebrow">Acesso seguro</p>
+    <h2>Entrar na conta</h2>
+    <p class="muted">Use os dados preenchidos para acessar o ambiente bancário.</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="field">
+        <label for="username">Usuário</label>
+        <input id="username" class="input" type="text" formControlName="username" autocomplete="username" />
+        @if (form.controls.username.touched && form.controls.username.invalid) {
+          <span class="error-text">Informe o usuário.</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="password">Senha</label>
+        <input id="password" class="input" type="password" formControlName="password" autocomplete="current-password" />
+        @if (form.controls.password.touched && form.controls.password.invalid) {
+          <span class="error-text">A senha precisa ter pelo menos 4 caracteres.</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="role">Perfil de acesso</label>
+        <select id="role" class="select" formControlName="role">
+          <option value="cliente">Cliente</option>
+          <option value="gerente">Gerente</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" type="submit" [disabled]="form.invalid || authStore.isLoading()">
+        {{ authStore.isLoading() ? 'Validando acesso...' : 'Entrar' }}
+      </button>
+    </form>
+
+    <div class="credentials">
+      <strong>Acesso rápido</strong>
+      <span>Usuário: User</span>
+      <span>Senha: 1234</span>
+    </div>
+  </section>
+</main>
